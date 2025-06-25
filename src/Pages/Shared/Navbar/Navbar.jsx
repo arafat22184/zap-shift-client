@@ -57,9 +57,9 @@ const Navbar = () => {
             {navItems}
           </ul>
         </div>
-        <a className="btn btn-ghost text-xl">
+        <button className="btn btn-ghost text-xl">
           <ProfastLogo></ProfastLogo>
-        </a>
+        </button>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">{navItems}</ul>
