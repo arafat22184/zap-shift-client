@@ -1,4 +1,6 @@
 import { NavLink, Outlet } from "react-router";
+import { FaHome, FaBox, FaHistory, FaUserEdit } from "react-icons/fa";
+import { HiOutlineLocationMarker } from "react-icons/hi";
 import ProfastLogo from "../Pages/Shared/ProfastLogo/ProfastLogo";
 
 const DashboardLayout = () => {
@@ -44,10 +46,30 @@ const DashboardLayout = () => {
           {/* Sidebar content here */}
           <ProfastLogo></ProfastLogo>
           <li>
-            <a>Home</a>
+            <NavLink to="/dashboard">
+              <FaHome className="inline mr-2" /> Home
+            </NavLink>
           </li>
           <li>
-            <NavLink to={"/dashboard/myParcels"}>My Parcels</NavLink>
+            <NavLink to="/dashboard/myParcels">
+              <FaBox className="inline mr-2" /> My Parcels
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/dashboard/paymentHistory">
+              <FaHistory className="inline mr-2" /> Payment History
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/dashboard/track">
+              <HiOutlineLocationMarker className="inline mr-2" /> Track a
+              Package
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/dashboard/profile">
+              <FaUserEdit className="inline mr-2" /> Update Profile
+            </NavLink>
           </li>
         </ul>
       </div>
