@@ -1,13 +1,14 @@
 import React from "react";
 import useAuth from "../../../Hooks/useAuth";
 
-const SocialLogin = () => {
+const SocialLogin = ({ navigate, from }) => {
   const { signInWithGoogle } = useAuth();
 
   const handleGoogleSignIn = () => {
     signInWithGoogle()
       .then((result) => {
         console.log(result);
+        navigate(from);
       })
       .catch((error) => {
         console.log(error);
