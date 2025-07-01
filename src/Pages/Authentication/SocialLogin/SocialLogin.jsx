@@ -1,24 +1,41 @@
 import React from "react";
+import { useLocation, useNavigate } from "react-router";
 import useAuth from "../../../Hooks/useAuth";
+import useAxios from "../../../Hooks/useAxios";
 
-const SocialLogin = ({ navigate, from }) => {
+const SocialLogin = () => {
   const { signInWithGoogle } = useAuth();
+  const location = useLocation();
+  const navigate = useNavigate();
+  const from = location.state?.from || "/";
+  const axiosInstance = useAxios();
 
   const handleGoogleSignIn = () => {
     signInWithGoogle()
-      .then((result) => {
-        console.log(result);
+      .then(async (result) => {
+        const user = result.user;
+        console.log(result.user);
+        // update userinfo in the database
+        const userInfo = {
+          email: user.email,
+          role: "user", // default role
+          created_at: new Date().toISOString(),
+          last_log_in: new Date().toISOString(),
+        };
+
+        const res = await axiosInstance.post("/users", userInfo);
+        console.log("user update info", res.data);
+
         navigate(from);
       })
       .catch((error) => {
-        console.log(error);
+        console.error(error);
       });
   };
 
   return (
     <div className="text-center">
       <p className="mb-4">OR</p>
-      {/* Google */}
       <button
         onClick={handleGoogleSignIn}
         className="btn bg-white text-black border-[#e5e5e5]"
